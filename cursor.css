@@ -1,0 +1,51 @@
+@media (min-width: 768px) {
+
+    *,
+    *::before,
+    *::after,
+    html,
+    body,
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    .logo {
+        cursor: none !important;
+    }
+
+    .custom-cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-cyan, #00f2fe);
+        /* لون النقطة */
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        /* لمنع المؤشر من حجب الضغطات */
+        z-index: 9999;
+    }
+
+    /* تصميم الدائرة الخارجية التي تتحرك بحركة ناعمة */
+    .custom-cursor-outline {
+        width: 30px;
+        height: 30px;
+        border: 2px solid var(--accent-green, #4facfe);
+        /* لون الدائرة الخارجية */
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9998;
+        /* السرعة والنعومة في اللحاق بالفأرة */
+        transition: transform 0.1s ease-out, cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+
+}
+
+.custom-cursor-dot,
+.custom-cursor-outline {
+    opacity: 0;
+}

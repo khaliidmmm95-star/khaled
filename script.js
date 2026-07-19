@@ -602,6 +602,58 @@ async function init() {
     initScrollEffects();
     bindModalEvents();
     animateCounters();
+    cursor();
 }
+
+
+
+function cursor() {
+    const cursorDot = document.querySelector(".custom-cursor-dot");
+    const cursorOutline = document.querySelector(".custom-cursor-outline");
+
+    window.addEventListener("mousemove", function (e) {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // تحريك النقطة الداخلية فوراً مع الفأرة
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        // تحريك الدائرة الخارجية خلفها بنعومة
+        // الأنيميشن المدمج في الـ CSS (transition) سيتولى جعل الحركة "هيك حلوة وسلسة"
+        cursorOutline.style.left = `${posX}px`;
+        cursorOutline.style.top = `${posY}px`;
+    });
+}
+
+
+const cursorDot = document.querySelector(".custom-cursor-dot");
+const cursorOutline = document.querySelector(".custom-cursor-outline");
+
+
+document.addEventListener("mouseout", (e) => {
+    if (!e.relatedTarget && !e.toElement) {
+        cursorDot.style.opacity = "0";
+        cursorOutline.style.opacity = "0";
+    }
+});
+
+document.addEventListener("mouseover", () => {
+    cursorDot.style.opacity = "1";
+    cursorOutline.style.opacity = "1";
+});
+
+document.querySelectorAll("iframe").forEach((iframe) => {
+    iframe.addEventListener("mouseenter", () => {
+        cursorDot.style.opacity = "0";
+        cursorOutline.style.opacity = "0";
+    });
+
+    iframe.addEventListener("mouseleave", () => {
+        cursorDot.style.opacity = "1";
+        cursorOutline.style.opacity = "1";
+    });
+});
+
 
 document.addEventListener('DOMContentLoaded', () => { init(); });
